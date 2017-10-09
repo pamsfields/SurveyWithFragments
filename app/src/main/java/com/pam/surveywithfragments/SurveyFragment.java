@@ -10,9 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.app.Activity.RESULT_OK;
-
-public class SurveyFragment extends Fragment{
+public class SurveyFragment extends Fragment {
     private Button mYesButton;
     private Button mNoButton;
     private Button resultsButton;
@@ -28,10 +26,12 @@ public class SurveyFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.surveyfragment, container, false);
 
-        Intent launchIntent = getIntent();
-
-        launchIntent.putExtra("no answers", noCount);
-        launchIntent.putExtra("yes answers", yesCount);
+        Intent launchIntent = new Intent(getActivity(), SurveyFragment.class);
+        startActivity(launchIntent);
+        Bundle resultsBundle = new Bundle();
+        String results = getArguments().getString("resultTally");
+        resultsBundle.putInt("resultTally", Integer.parseInt(yesCountString));
+        resultsBundle.putInt("resultTally", Integer.parseInt(noCountString));
 
         QuestionTextView = (TextView) view.findViewById(R.id.question_text_view);
 
@@ -40,7 +40,7 @@ public class SurveyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 yesCount++;
-                Toast.makeText(SurveyFragment.this, "Thank You!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Thank You!", Toast.LENGTH_SHORT).show();
                 yesCountString = "@string/yes_count_text" + yesCount;
             }
         });
@@ -49,7 +49,7 @@ public class SurveyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 noCount++;
-                Toast.makeText(SurveyFragment.this, "Thank You!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Thank You!", Toast.LENGTH_SHORT).show();
                 noCountString = "@string/no_count_text" + noCount;
             }
         });
@@ -58,9 +58,9 @@ public class SurveyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //Start ResultsActivity
-                Intent resultsIntent = new Intent(SurveyFragment.this, ResultsFragment.class);
+                Intent resultsIntent = new Intent(getActivity(), ResultsFragment.class);
                 startActivityForResult(resultsIntent, RESULTS_CODE);
-                onActivityResult(CUSTOM_CODE, RESULT_OK, resultsIntent);
+                //onActivityResult(CUSTOM_CODE, RESULT_OK, resultsIntent);
             }
         });
 
@@ -69,37 +69,35 @@ public class SurveyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //Start CustomActivity
-                Intent customIntent = new Intent(MainActivity.this, ConfigurationFragment.class);
+                Intent customIntent = new Intent(getActivity(), ConfigurationFragment.class);
                 startActivityForResult(customIntent, CUSTOM_CODE);
-                onActivityResultCustom(CUSTOM_CODE, RESULT_OK, customIntent);
+                //onActivityResultCustom(CUSTOM_CODE, RESULT_OK, customIntent);
             }
         });
-    }
 
-    @Override
-    protected void onActivityResultCustom(int CUSTOM_CODE, int resultCode, Intent customIntent) {
-        // Check which request it is that we're responding to
-        if (CUSTOM_CODE == RESULT_OK) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                //get the requested information from CustomQuestionActivity
-                //set up question and answers for the survey
-                //restart SurveyActivity so new question comes up
+
+        /*@Override
+        protected void onActivityResultCustom ( int CUSTOM_CODE, int resultCode, Intent customIntent)
+        {
+            // Check which request it is that we're responding to
+            if (CUSTOM_CODE == RESULT_OK) {
+                // Make sure the request was successful
+                if (resultCode == RESULT_OK) {
+                    //get the requested information from CustomQuestionActivity
+                    //set up question and answers for the survey
+                    //restart SurveyActivity so new question comes up
+                }
             }
         }
-    }
-    @Override
-    protected void onActivityResult(int RESULTS_CODE, int resultCode, Intent resultsIntent) {
-        // Check which request it is that we're responding to
-        if (RESULTS_CODE == RESULT_OK) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                // reset counts for noCount and yesCount
+        @Override
+        public void onActivityResult ( int RESULTS_CODE, int resultCode, Intent resultsIntent){
+            // Check which request it is that we're responding to
+            if (RESULTS_CODE == RESULT_OK) {
+                // Make sure the request was successful
+                if (resultCode == RESULT_OK) {
+                    // reset counts for noCount and yesCount
+                }
             }
-        }
-    }
-
-    public Intent getIntent() {
-        return mIntent;
+        } */
     }
 }

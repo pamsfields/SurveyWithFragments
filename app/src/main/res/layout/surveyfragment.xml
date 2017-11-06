@@ -21,16 +21,16 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/yes_button"
+            android:id="@+id/answer1_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/yes_button"/>
+            android:text="@string/answer1_button"/>
 
         <Button
-            android:id="@+id/no_button"
+            android:id="@+id/answer2_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_button"/>
+            android:text="@string/answer2_button"/>
 
 
     </LinearLayout>

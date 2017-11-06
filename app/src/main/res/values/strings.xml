@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">SurveyWithFragments</string>
-    <string name="yes_button">Yes</string>
-    <string name="no_button">No</string>
+    <string name="answer1_button">Yes</string>
+    <string name="answer2_button">No</string>
     <string name="question_text">Are you excited for Daylights Savings Time ending?</string>
     <string name="thanks_toast">Thank You!</string>
-    <string name="yes_count_text">Yes Counts: </string>
-    <string name="no_count_text">No Counts: </string>
+    <string name="answer1_count_text">Answer 1 Counts: </string>
+    <string name="answer2_count_text">Answer 2 Counts: </string>
     <string name="reset_button_text">Reset</string>
     <string name="continue_button_text">Continue</string>
     <string name="results_button">See Results of the Survey</string>

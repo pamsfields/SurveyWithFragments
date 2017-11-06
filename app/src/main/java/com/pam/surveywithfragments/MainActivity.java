@@ -1,5 +1,6 @@
 package com.pam.surveywithfragments;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -29,13 +30,12 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    @Override
     public void configureSurvey() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
+        Fragment prev = fm.findFragmentByTag(TAG);
         //Create a new Detail fragment. Add it to the Activity.
-        ConfigurationFragment configuNewFragment = ConfigurationFragment.newInstance();
+        ConfigurationFragment configuNewFragment = (ConfigurationFragment) fm.findFragmentByTag(CONFIG_FRAG_TAG);
         ft.add(android.R.id.content, configuNewFragment);
         //Add to the back stack, so if user presses back button from the Detail
         //fragment, it will revert this transaction - Activity will go back to the Add+List fragments
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    @Override
     public void viewSurveyResults() {
 
         //Find List fragment and tell it that the data has changed
@@ -55,8 +54,12 @@ public class MainActivity extends AppCompatActivity {
         //This removes the Detail fragment from the Activity, which leaves the Add+List fragments.
 
         FragmentTransaction ft = fm.beginTransaction();
+        ft.addToBackStack(RESULTS_FRAG_TAG);
         fm.popBackStack();
         ft.commit();
     }
 
+    public ConfigurationFragment getConfigurationFragment() {
+        return mConfigurationFragment;
+    }
 }

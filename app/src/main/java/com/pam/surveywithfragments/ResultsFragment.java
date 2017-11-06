@@ -22,10 +22,10 @@ public class ResultsFragment extends Fragment{
 
         final String noCountString = resultsBundle.getString("noCountString");
         final String yesCountString = resultsBundle.getString("yesCountString");
-        yes_Counter= (TextView) getView().findViewById(R.id.yes_Counter);
+        yes_Counter= (TextView) getView().findViewById(R.id.answer1_Counter);
         yes_Counter.setText( yesCountString);
 
-        no_Counter= (TextView) getView().findViewById(R.id.no_Counter);
+        no_Counter= (TextView) getView().findViewById(R.id.answer2_Counter);
         no_Counter.setText(noCountString);
 
         continueButton = (Button) getView().findViewById(R.id.continue_button);
